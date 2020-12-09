@@ -139,6 +139,8 @@ cython_debug/
 
 # Latex related
 *.log
+*.csv
 *.gz
 *.aux
 *.pdf
+*.out

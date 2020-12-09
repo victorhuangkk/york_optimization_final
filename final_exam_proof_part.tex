@@ -7,7 +7,9 @@
 \usepackage[ruled,vlined]{algorithm2e}
 \usepackage{listings}
 \usepackage[utf8]{inputenc}
+\usepackage{hyperref} 
 \usepackage{amsmath}
+\usepackage{csvsimple}
 \usepackage{graphicx}
 % One inch margins
 \PassOptionsToPackage{margin=0.75in}{geometry}
@@ -17,6 +19,8 @@
 
 \begin{document}
 \maketitle %This command prints the title based on information entered above
+All the source code is stored at \url{https://github.com/victorhuangkk/york_optimization_final}
+
 \begin{section}{Problem 12}
 	\begin{figure}[htp]
 		\centering
@@ -174,6 +178,56 @@
 	\end{figure}
 
 \end{section}
+
+\begin{section}{Problem 18}
+	\subsection{Part a}
+	First, I tested all available methods in scipy with tolerance $10^{-6}$. All results are summarized below. Since the Gradient (Jacobian) is not provided in this case, some methods through out error messages. It will be discussed later in the problem. 
+	
+	\begin{table}[]
+		\begin{tabular}{lllll}
+			\hline
+			Method & NIterations & $x_1$ & $x_2$& Final Function Value \\
+			\hline\hline
+			Nelder-Mead  & 58  & 2.541  & 0.26     & 2.247    \\
+			Powell       & 8   & 2.541  & 0.26     & 2.247    \\
+			CG           & 0   & 3      & 0.5      & 10805.97 \\
+			BFGS         & 32  & 2.541  & 0.26     & 2.247    \\
+			TNC          & 10  & 2.54   & 0.26     & 2.247    \\
+			L-BFGS-B     & 16  & 2.541  & 0.26     & 2.247    \\
+			TNC          & 10  & 2.54   & 0.26     & 2.247    \\
+			trust-constr & 986 & 2.541  & 0.26     & 2.247    \\
+			SLSQP        & 2   & -5.104 & -189.594 & 291     
+		\end{tabular}
+	\end{table}
+    
+    From the table, we know that some algorithms did a good jon but some doesn't. Then, let's give the gradient to the method and do another round. 
+    
+    	\begin{table}[]
+    	\begin{tabular}{lllll}
+    		\hline
+    		Method & NIterations & $x_1$ & $x_2$& Final Function Value \\
+    		\hline\hline
+    		Nelder-Mead  & 58  & 2.541  & 0.26     & 2.247    \\
+    		Powell       & 8   & 2.541  & 0.26     & 2.247    \\
+    		CG           & 0   & 3      & 0.5      & 10805.97 \\
+    		BFGS         & 32  & 2.541  & 0.26     & 2.247    \\
+    		TNC          & 10  & 2.54   & 0.26     & 2.247    \\
+    		L-BFGS-B     & 16  & 2.541  & 0.26     & 2.247    \\
+    		TNC          & 10  & 2.54   & 0.26     & 2.247    \\
+    		trust-constr & 986 & 2.541  & 0.26     & 2.247    \\
+    		SLSQP        & 2   & -5.104 & -189.594 & 291     
+    	\end{tabular}
+    \end{table}
+
+	CG, Newton-CG, SLSQP, dogleg, trust-ncg, trust-krylov, and trust-exact require the gradient input. 
+	\subsection{Part b}
+	
+	
+	\subsection{Part c}
+	The visualization is in the previous two parts already. Please refer there to see summaries. And in terms of source code, please refer to github or the other files. 
+\end{section}
+
+
 
 
 \end{document}
