@@ -25,14 +25,32 @@ All the source code is stored at \url{https://github.com/victorhuangkk/york_opti
 \includegraphics[width=10cm]{problem12.png}
 
 \subsection{Part a}
-The level plot of the function is 
-\begin{figure}[htp]
-	\centering
-\includegraphics[width=8cm]{problem12_plt1.png}
-\end{figure}
-The quadratic approximation 
+The level plot of the function is shown below. The left hand side is the original function and the right hand side is the quadratic appropriation at $x_0 = (0, -1)^T$
+
+\includegraphics[width=12cm]{problem12_plt1.png}
+
+
 \subsection{Part b}
+The trust region method is implemented to solve this sub-problem
+\lstinputlisting[language=python, basicstyle=\tiny]{trust_region.py}
+
+Computational Results 
+
+
+\begin{tabular}{lll}
+	\hline
+	$\Delta_0$ & $d_0$ & Steps Until Converge \\
+	\hline\hline
+	0.25 & (0.02, 0.249) & 2 \\
+	0.75 & (0.048, 1.0)  & 1 \\
+	1.25 & (0.048, 1.0)  & 1
+\end{tabular}
+
 \subsection{Part c}
+The original function's level graph is the same but the quadratic approximation is different. 
+\includegraphics[width=12cm]{problem12_plt2.png}
+
+The algorithm failed in this case since the hessian matrix is not positive definite such that Cholesky cannot be performed. 
 \end{section}
 
 \begin{section}{Problem 13}
@@ -73,7 +91,7 @@ The quadratic approximation
     	  0 \end{pmatrix}$$
     
     The implementation is done in python and I pasted the code here for reference purposes. 
-    \lstinputlisting[language=python]{cg_algo.py}
+    \lstinputlisting[language=python, basicstyle=\small]{cg_algo.py}
     
     And the execution results is 
 
@@ -225,10 +243,9 @@ The quadratic approximation
 	 
 	\subsection{Part 3}
 	The visualization has been done in python via matplotlib. Please refer to the source code to see details. Here is the plot. 
-		\begin{figure}[htp]
-		\centering
+
 		\includegraphics[width=12cm]{problem15_plt1.png}
-	\end{figure}
+
 
 \end{section}
 
@@ -252,23 +269,23 @@ The quadratic approximation
 			SLSQP        & 2   & -5.104 & -189.594 & 291     
 		\end{tabular}
 	
-    
+\vspace{10mm}
     From the table, we know that some algorithms did a good jon but some doesn't. Then, let's give the gradient to the method and do another round. 
-    
+    \vspace{5mm}
     	\begin{tabular}{lllll}
     		\hline
     		Method & NIterations & $x_1$ & $x_2$& Final Function Value \\
     		\hline\hline
-    		Nelder-Mead  & 58 & 2.541    & 0.26    & 2.247    \\
-    		Powell       & 8  & 2.541    & 0.26    & 2.247    \\
-    		CG           & 4  & 1.011    & 0.382   & 13.499   \\
-    		BFGS         & 2  & 2.698    & -18.447 & 291      \\
-    		Newton-CG    & 24 & 1.055    & 0.378   & 12.91    \\
-    		L-BFGS-B     & 8  & 1.098    & 0.373   & 12.142   \\
-    		TNC          & 1  & -1.136   & 0.475   & 2908.226 \\
-    		trust-constr & 24 & 1.029    & 0.381   & 13.289  \\
-    		SLSQP        & 2  & -187.094 & -7.604  & 291.284  
-    	\end{tabular}
+			Nelder-Mead  & 58  & 2.541  & 0.26     & 2.247    \\
+			Powell       & 8   & 2.541  & 0.26     & 2.247    \\
+			CG           & 0   & 3      & 0.5      & 10805.97 \\
+			BFGS         & 32  & 2.541  & 0.26     & 2.247    \\
+			Newton-CG    & 15  & 2.541  & 0.26     & 2.247    \\
+			L-BFGS-B     & 16  & 2.541  & 0.26     & 2.247    \\
+			TNC          & 9   & 2.541  & 0.26     & 2.247    \\
+			trust-constr & 974 & 2.541  & 0.26     & 2.247    \\
+			SLSQP        & 2   & -5.104 & -189.594 & 291   
+    	 \end{tabular}
 
 	CG, Newton-CG, SLSQP, dogleg, trust-ncg, trust-krylov, and trust-exact require the gradient input. 
 	\subsection{Part b}
