@@ -22,17 +22,17 @@
 All the source code is stored at \url{https://github.com/victorhuangkk/york_optimization_final}
 
 \begin{section}{Problem 12}
-\includegraphics[width=10cm]{problem12.png}
+\includegraphics[width=10cm]{img/problem12.png}
 
 \subsection{Part a}
-The level plot of the function is shown below. The left hand side is the original function and the right hand side is the quadratic appropriation at $x_0 = (0, -1)^T$
+The level plot of the function is shown below. The left hand side is the original function and the right hand side is the quadratic appropriation at $x_0 = (0, -1)^T$. \\
 
-\includegraphics[width=12cm]{problem12_plt1.png}
+\includegraphics[width=12cm]{img/problem12_plt1.png}
 
 
 \subsection{Part b}
 The trust region method is implemented to solve this sub-problem
-\lstinputlisting[language=python, basicstyle=\tiny]{trust_region.py}
+\lstinputlisting[language=python, basicstyle=\tiny]{src/trust_region.py}
 
 Computational Results 
 
@@ -47,15 +47,15 @@ Computational Results
 \end{tabular}
 
 \subsection{Part c}
-The original function's level graph is the same but the quadratic approximation is different. 
-\includegraphics[width=12cm]{problem12_plt2.png}
+The original function's level graph is the same but the quadratic approximation is different. \\
+\includegraphics[width=12cm]{img/problem12_plt2.png}
 
 The algorithm failed in this case since the hessian matrix is not positive definite such that Cholesky cannot be performed. 
 \end{section}
 
 \begin{section}{Problem 13}
 
-   \includegraphics[width=10cm]{problem13.png}
+   \includegraphics[width=10cm]{img/problem13.png}
 
     First, let's calculate A and b from the given formula:
     \[f(x) = \frac{1}{2}(x_1, x_2, x_3) \begin{pmatrix}
@@ -91,7 +91,7 @@ The algorithm failed in this case since the hessian matrix is not positive defin
     	  0 \end{pmatrix}$$
     
     The implementation is done in python and I pasted the code here for reference purposes. 
-    \lstinputlisting[language=python, basicstyle=\small]{cg_algo.py}
+    \lstinputlisting[language=python, basicstyle=\small]{src/cg_algo.py}
     
     And the execution results is 
 
@@ -108,7 +108,7 @@ The algorithm failed in this case since the hessian matrix is not positive defin
 \end{section}
 
 \begin{section}{Problem 15}
-	\includegraphics[width=12cm]{problem15.png}
+	\includegraphics[width=12cm]{img/problem15.png}
 
 	\subsection{Part 1}
 	First, let's write the matrix format of the function,
@@ -244,7 +244,7 @@ The algorithm failed in this case since the hessian matrix is not positive defin
 	\subsection{Part 3}
 	The visualization has been done in python via matplotlib. Please refer to the source code to see details. Here is the plot. 
 
-		\includegraphics[width=12cm]{problem15_plt1.png}
+		\includegraphics[width=12cm]{img/problem15_plt1.png}
 
 
 \end{section}
