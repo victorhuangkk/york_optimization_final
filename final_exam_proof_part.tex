@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass[10pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage{cite}
@@ -12,7 +12,7 @@
 \usepackage{csvsimple}
 \usepackage{graphicx}
 % One inch margins
-\PassOptionsToPackage{margin=0.75in}{geometry}
+\PassOptionsToPackage{margin=0.25in}{geometry}
 \title{Modern Optimization Final Exam}
 \author{Guanhua Huang}
 \date\today
@@ -33,19 +33,34 @@ Let's analyze the two parts separately, which are $a(T, T)$ and $l(T)$. Those tw
 \[l(T) = \int_{0}^{1} f(x)T(x)dx\]
 
 Since we assume the second order differentiable, we can rewrite all the terms into a series of integral summations. 
+\[\frac{1}{2}a(T, T) = \frac{1}{2} \int_{0}^{1}T^\prime(x)T^{\prime}(x) dx\]
+\[= \int_{0}^{x_1}(T^{\prime}(x))^2dx + \int_{x_1}^{x_2}(T^{\prime}(x))^2dx + ... \int_{x_{n-1}}^{x_n}(T^{\prime}(x))^2dx\]
+\[\approxeq \sum_{i=1}^{N-1}h (T^{\prime}_{i+\frac{1}{2}})^2\]
+\[\approxeq \sum_{i=1}^{N-1}h \frac{1}{h}(T_{i+1} - T_{i})\frac{1}{h}(T_{i+1} - T_{i})\]
+\[= \sum_{i=1}^{N-1}\frac{1}{h}(T_{i+1} - T_{i})^2\]
+
+
+And the approximation of $l(T)$ is done as below
+
 \[\int_{0}^{1}f(x)T(x)dx = \int_{0}^{x_1}f(x)T(x)dx + \int_{x_1}^{x_2}f(x)T(x)dx + ... \int_{x_{n-1}}^{x_n}f(x)T(x)dx\]
 \[= \sum_{i=1}^{N-1} \int_{x_i}^{x_{i+1}}f(x)T(x)dx\]
 \[\approxeq \sum_{i=1}^{N-1} hf(x_{i+\frac{1}{2}})T(x_{i+\frac{1}{2}}), \;\;\; (\int_{x_i}^{x_{i+1}}g(x)dx \approxeq hg_{i+\frac{1}{2}} )\]
 
 \[\approxeq h\sum_{i=1}^{N-1}\frac{1}{2} (f(x_i) + f(x_{i+1})) \frac{1}{2} (T(x_i) + T(x_{i+1}))\]
 
+After combining these two terms together, we got the following approximation to the original objective function,
+\[min(\frac{1}{h} \sum_{i=1}^{N-1}(T(x_{i+1}) - T(x_i))^2 - \frac{h}{4}\sum_{i=1}^{N-1} (f(x_i) + f(x_{i+1})) (T(x_i) + T(x_{i+1})))\]
+\[s.t. \;\;\;\;\ T(0) = T(1) = 0\]
+
 Then, in order to change the constraint optimization problem to an unconstrained version, Lagrange Multiple is used. 
+
+\[min(\frac{1}{h} \sum_{i=1}^{N-1}(T(x_{i+1}) - T(x_i))^2 - \frac{h}{4}\sum_{i=1}^{N-1} (f(x_i) + f(x_{i+1})) (T(x_i) + T(x_{i+1})) + \lambda_0T(0) + \lambda_1T(1))\]
 
 \subsection{Part b}
 
 
 \subsection{Part c}
-
+As hinted by the instructor, $f(x) = c = 1$ to simplify the visualization. 
 
 \subsection{Part d}
 The Armijo size rule has been replaced by the predefined step size and the results are summarized below. \\
