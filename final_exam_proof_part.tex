@@ -63,7 +63,11 @@ To convert the polynomial to matrix format, let's rewrite the objective function
 \[\frac{1}{h} \sum_{i=1}^{N-1}(T(x_{i+1}) - T(x_i))^2 = \frac{1}{h} X^T A X\]
 \[\frac{1}{h} (T_1^2 + 2T_2^2 + 2T_3^2 +... + 2(T_{N-1})^2 + (T_{N})^2 - 2T_1T_2 - 2T_2T_3 - .... - 2T_{N-1}T_{N})\]
 
-One route to write the problem as an unconstrained problem is to do the following. Just to clarify here. $X = (T_1, T_2, T_3, ... T_{N-1}, T_N, \lambda_1, \lambda_N)^T$. This is the unknown vector we are trying to solve. However, $f(x_i)$ is a given value if $x_i$ is given. Everything looks fine up until now. The problem comes up when I tried to decompose matrix A. It is not positive definite anymore. For that reason, I decided to use penalty terms, fix $\lambda_1$ and $\lambda_N$ to solve this problem. For illustration purposes, I fix $N = 6$, $h = 0.2$, $\lambda_1 = 1 = \lambda_N$ from now on and would write out all parameters explicitly. 
+One route to write the problem as an unconstrained problem is to do the following. Just to clarify here. $X = (T_1, T_2, T_3, ... T_{N-1}, T_N, \lambda_1, \lambda_N)^T$. This is the unknown vector we are trying to solve. However, $f(x_i)$ is a given value if $x_i$ is given. Everything looks fine up until now. The problem comes up when I tried to decompose matrix A. It is not positive definite anymore. 
+
+\includegraphics[width=13cm]{img/problem9_proof.png}
+
+For that reason, I decided to use penalty terms, fix $\lambda_1$ and $\lambda_N$ to solve this problem. For illustration purposes, I fix $N = 6$, $h = 0.2$, $\lambda_1 = 1 = \lambda_N$ from now on and would write out all parameters explicitly. 
 
 \[A = 2 \times 5 \times \begin{pmatrix}
 2 & -1 & 0 & 0 & 0 &0\\
@@ -81,11 +85,12 @@ One route to write the problem as an unconstrained problem is to do the followin
 0 & 0 & 0 & 1 & 1 &1\\
 0 & 0 & 0 & 0 & 1 &1 \end{pmatrix}, \;\;\; f(x_i) = (1, 1, 1, 1, 1, 1)\]
 
-\[b = f(x_i)B =  \]
+\[b = f(x_i)B = 0.2/4 \times (2, 3, 3, 3, 3, 2) \]
 
 So, in the end, the problem is formulated as the following: 
 \[l(T) = \frac{1}{2} X^T A X + b^T X \to min\]
 
+As observed from the approximation, the quadratic terms omitted a few things. In the very end, we can see what's the results by these approximations. 
 \subsection{Part b}
 After transforming the original problem into a standard quadratic optimization problem, the uniqueness of solution can be proven by the positive definiteness of matrix A. To prove the positive definiteness, I would try to prove all the pivots of A (which is a symmetric square metrics) are positive. Then, the matrix is positive definite. 
 \begin{proof}
@@ -100,9 +105,13 @@ As hinted by the instructor, $f(x) = c = 1$ to simplify the visualization. Coord
 This is the exact temperature distribution over the bar, with the simple function $T(x) = \frac{1}{2}x(x-1)$\\
 \includegraphics[width=10cm]{img/problem9_plt1.png}
 
+The gradient method with Armijo step size rule's visualization is shown here
+\includegraphics[width=10cm]{img/problem9_plt2.png}
 \subsection{Part d}
-The Armijo size rule has been replaced by the predefined step size and the results are summarized below. \\
+The Armijo size rule has been replaced by the predefined step size and the results are summarized below. In terms of gradient method, $\lambda = 0.2$ overflow on my laptop. So, I showed the $1/k$'s results below. \\
+\includegraphics[width=10cm]{img/problem9_plt3.png}
 
+As we see, they converge in a very similar manner. 
 \end{section}
 
 \begin{section}{Problem 12}
@@ -328,13 +337,13 @@ The algorithm failed in this case since the hessian matrix is not positive defin
 	\subsection{Part 3}
 	The visualization has been done in python via matplotlib. Please refer to the source code to see details. Here is the plot. 
 
-		\includegraphics[width=8cm]{img/problem15_plt1.png}
+	\includegraphics[width=6cm]{img/problem15_plt1.png}
 
 
 \end{section}
 
 \begin{section}{Problem 18}
-	\includegraphics[width=10cm]{img/problem18.png}
+	\includegraphics[width=8cm]{img/problem18.png}
 	\subsection{Part a}
 	First, followed by the hints posted on the website, I tested the four methods, which are ,Newton-cg, trust-ncg, trust-krylov, and trust-exact in scipy with tolerance $10^{-6}$. All results are summarized below. To make sure all methods works fine, the original function, Jacobian and Hessian are all provided to the program. In terms of details, please refer to the source code. 
 
@@ -343,9 +352,9 @@ The algorithm failed in this case since the hessian matrix is not positive defin
     		Method &Iterations & $x_1$ & $x_2$& Function Value \\
     		\hline\hline
 			newton-cg  & 14  & 2.541  & 0.260& 2.247    \\
-			trust-ncg       & 15   & 2.541  & 0.260 & 2.247    \\
-			trust-krylov    & 21   & 2.541  & 0.260 & 2.247 \\
-			trust-exact     & 14  & 2.541  & 0.260 & 2.247
+			trust-ncg  & 15   & 2.541  & 0.260 & 2.247    \\
+			trust-krylov & 21   & 2.541  & 0.260 & 2.247 \\
+			trust-exact  & 14  & 2.541  & 0.260 & 2.247
     	 \end{tabular}
      
     So, all the methods generated the same results.  
