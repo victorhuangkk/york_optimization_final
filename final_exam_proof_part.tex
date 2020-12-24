@@ -107,11 +107,14 @@ This is the exact temperature distribution over the bar, with the simple functio
 
 The gradient method with Armijo step size rule's visualization is shown here
 \includegraphics[width=10cm]{img/problem9_plt2.png}
+
+The coordinate gradient descent code is shown here. 
+\lstinputlisting[language=python, basicstyle=\tiny]{src/coordinate_descent.py}
 \subsection{Part d}
 The Armijo size rule has been replaced by the predefined step size and the results are summarized below. In terms of gradient method, $\lambda = 0.2$ overflow on my laptop. So, I showed the $1/k$'s results below. \\
 \includegraphics[width=10cm]{img/problem9_plt3.png}
 
-As we see, they converge in a very similar manner. 
+As we see, they converge in a very similar manner. Coordinatewise descent is not able to converge in this case. 
 \end{section}
 
 \begin{section}{Problem 12}
